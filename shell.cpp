@@ -6,44 +6,43 @@
 #include<stdlib.h>
 #include<vector>
 #include<string.h>
+#include <stdio.h>
 
 using namespace std;
 
 int cd(char *path) 
 {
-	
     return chdir(path);
 }
+
 int main()
 {
 	while(1)
 	{
-		char* args[10];
+		
+		char* args[100];
 		vector<string> v;
 		string str;
 		getline(cin,str);
 		
 		
 		char* command = (char*) str.c_str();
-		string newLine="\n";
 		if(command[0]==NULL)
 			continue;
+		
 		char* pch;
 		pch = strtok (command," ");
 		int i=0;
 		
 		while (pch != NULL)
 		{
-			//printf ("%s\n",pch);
 			args[i] = pch;
 			pch = strtok (NULL, " ");
 			i++;
 		}
+		
 		args[i] = NULL;
 		i++;
-		
-		
-		
 		
 		if (strcmp(args[0], "cd") == 0) {
             if (cd(args[1]) < 0) {
@@ -55,7 +54,7 @@ int main()
 		
 		for(int j=0; j<i; j++)
 		{
-			cout<<args[j]<<"\n";
+			cout<<args[j];
 		}
 		/* char* args[3];
 		string ls = "ls";
@@ -68,6 +67,7 @@ int main()
 		
 		if(pid==0)
 		{
+			//system("./bashRC.sh");
 			cout<<"child:"<<pid<<"\n";
 			if(execvp(args[0],args)==-1)
 				perror("exec");
