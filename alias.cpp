@@ -153,15 +153,27 @@ void aliass(string str)
 	// }
 }
 
+void grepp(string str)
+{
+	string s="";
+	for(int i=0; i<str.length(); i++)
+	{
+		if(str[i]!='"')
+			s+=str[i];
+	}
+	
+	execute(s);
+}
 int main()
 {
 	while(1)
 	{
 		string str;
 		string al = "alias";
+		string gr = "grep";
 		//cout<<"Enter the command";
 		getline(cin,str);
-		int i;
+		int i,j;
 		
 		for(i=0; i<al.length(); i++)
 		{
@@ -169,8 +181,16 @@ int main()
 				break;
 		}
 		
+		for(j=0; j<al.length(); j++)
+		{
+			if(str[j]!=gr[j])
+				break;
+		}
+		
 		if(i==5)
 			aliass(str);
+		else if(j==4)
+			grepp(str);
 		else
 			check1(str);
 		
