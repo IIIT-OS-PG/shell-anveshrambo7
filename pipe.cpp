@@ -10,6 +10,7 @@
 #include<sys/wait.h>
 
 using namespace std;
+int c=0;
 
 void execute(string str)
 {
@@ -44,7 +45,15 @@ void execute(string str)
 
 void execute1(string str)
 {
-	// cout<<"In Execute\n";
+	 cout<<"In Execute\n";
+	c++;
+	string fileNo = to_string(c);
+	string file = "d"+fileNo+".txt";
+	char* fileName= (char*)file.c_str();
+	
+	cout<<file<<endl;
+	
+	
 	char* command = (char*) str.c_str();
 	char* pch;
 	char* args[100];
@@ -65,19 +74,13 @@ void execute1(string str)
 		
 	if(pid==0)
 	{
-		int fd1 = open("d.txt",O_RDWR | O_CREAT | O_TRUNC,0666);
+		int fd1 = open(fileName,O_RDWR | O_CREAT | O_TRUNC,0666);
 		dup2(fd1,1);
 		close(fd1);
-		//pid_t pid = fork();
 		
-		//if(pid==0)
-		//{
 			if(execvp(args[0],args)==-1)
 				perror("exec");
-				
-		//}
-		//close(fd1);	
-		//close (1);		
+		
 	}
 	else 
 		wait(0);
@@ -120,16 +123,28 @@ void pipee(string str,int count)
 		}
 		k=++j;
 		
-		if(i<count)
+		if(i==0)
 		{
-			//cout<<s1;
 			execute1(s1);
 		}
-		if(i==count)
+		else if(i<count)
 		{
+			string fileNo = to_string(i);
+			string file = " d"+fileNo+".txt";
+			
 			string com="";
-			com +=s1+" d.txt";
-			//cout<<com<<endl;
+			com +=s1+file;
+			cout<<com<<endl;
+			execute1(com);
+		}
+		else if(i==count)
+		{
+			string fileNo = to_string(i);
+			string file = " d"+fileNo+".txt";
+			
+			string com="";
+			com +=s1+file;
+			cout<<com<<endl;
 			execute(com);
 		}
 	}
@@ -147,6 +162,7 @@ int main()
 {
 	while(1)
 	{
+		c=0;
 		string str;
 		getline(cin,str);
 		char buff[1024];
