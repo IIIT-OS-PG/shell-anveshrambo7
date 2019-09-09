@@ -91,24 +91,6 @@ void pipee(char* str,int count)
 {
 	string s1="",s2="";
 	int i,j,k;
-	//cout<<str<<endl;
-	{
-	// for(i=0; i<str.length(); i++)
-	// {
-		
-		// if(str[i]!='|')
-			// s1+=str[i];
-		// else break;
-	// }
-	
-	// for(++i; i<str.length(); i++)
-	// {
-		// if(str[i]!='|')
-			// s2+=str[i];
-		// else
-			// break;
-	// }
-	}
 	
 	j=0;
 	k=0;
@@ -127,7 +109,6 @@ void pipee(char* str,int count)
 		}
 		k=++j;
 		
-		//cout<<s1<<",";
 		if(i==0)
 		{
 			executePipe(s1);
@@ -151,7 +132,7 @@ void pipee(char* str,int count)
 			
 			//cout<<s1;
 			
-			//Detecting > or >> in pipe Command
+			
 			for(int y=0; y<s1.length(); y++)
 			{
 				if(s1[y]=='>' && s1[y+1]=='>')
@@ -227,14 +208,6 @@ void pipee(char* str,int count)
 			execute3(com);
 		}
 	}
-	
-	// execute1(s1);
-	
-	// string com = "";
-	// com +=s2+" d.txt";
-	// cout<<com<<endl;
-	// execute(com);
-
 }
 
 void pipeAlias(char* str,map<string,string> m)
@@ -245,12 +218,6 @@ void pipeAlias(char* str,map<string,string> m)
 	char* pch;
 	char* args[100];
 	string modifiedCommand="";
-	
-	// cout<<"Map Contents are\n";
-	// for(it=m.begin();it!=m.end(); it++)
-		// cout<<it->first<<","<<it->second<<endl;
-	
-	
 	
 	pch = strtok (command,"|");
 	int i=0;
@@ -307,8 +274,7 @@ void pipeAlias(char* str,map<string,string> m)
 		
 		if(found==0)
 			actualCommand=string(s);
-		//cout<<actualCommand<<endl;
-		//char* wholeCommand = (char*)actualCommand.c_str();
+		
 		if(x<(i-1))
 		{	
 			modifiedCommand+=actualCommand+"|";
@@ -317,37 +283,8 @@ void pipeAlias(char* str,map<string,string> m)
 			modifiedCommand+=actualCommand;
 	}
 	
-	// for(int x=0;x<i; x++)
-		
-		//cout<<modifiedCommand<<endl;
+	
 		str = (char*)modifiedCommand.c_str();
 		pipee(str,i-1);
 	
 }
-
-
-// int main()
-// {
-	// while(1)
-	// {
-		// //c=0;
-		// //string str;
-		// //getline(cin,str);
-		// //char buff[1024];
-		// int i,count=0;
-		
-		// for(i=0; i<str.length(); i++)
-		// {
-			// if (str[i]=='|')
-				// count++;
-		// }
-		// //cout<<count<<"\n";
-		// if(count>0)
-		// {
-			// pipee(str,count);
-		// }
-		// else
-			// execute(str);
-	// }
-	// return 0;
-// }

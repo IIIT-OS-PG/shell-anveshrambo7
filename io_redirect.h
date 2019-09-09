@@ -13,6 +13,7 @@ using namespace std;
 //int c=0;
 void execute2(string str)
 {
+	int status;
 	char* command = (char*) str.c_str();
 	char* pch;
 	char* args[100];
@@ -35,23 +36,22 @@ void execute2(string str)
 	if(pid==0)
 	{
 		if(execvp(args[0],args)==-1)
+		{	//perror("exec");
+			status=127;
 			perror("exec");
+		}
+		else
+		{
+			cout<<"HI";
+			status=0;
+		}
 	}
 	else
 	wait(0);
 }
 
 void executeIO(string str)
-{
-	
-	// cout<<"In Execute\n";
-	// c++;
-	// string fileNo = to_string(c);
-	// string file = "IO"+fileNo+".txt";
-	// char* fileName= (char*)file.c_str();
-	
-	// cout<<file<<endl;
-	
+{	
 	char* command = (char*) str.c_str();
 	char* pch;
 	char* args[100];
@@ -132,25 +132,3 @@ void io(char* str,int op)
 	}
 }
 
-// int main()
-// {
-	// int op=1;
-	// string str;
-	// getline(cin,str);
-	
-	// int i;
-	
-	// for(i=0; i<str.length(); i++)
-	// {
-		// if(str[i] == '>')
-			// break;
-	// }
-	// if(str[i+1]=='>')
-		// op=2;
-	// if(i<str.length())
-		// io(str,op);
-	// else
-		// execute(str);
-	
-	// return 0;
-// }
